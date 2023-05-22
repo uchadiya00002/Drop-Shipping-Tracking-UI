@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  MenuItem,
-  TextField,
-  InputAdornment,
-  IconButton,
   CircularProgress,
   TableCell,
   TableRow,
@@ -15,7 +11,6 @@ import {
   Paper,
   useMediaQuery,
 } from "@mui/material";
-import { AiOutlineSearch } from "react-icons/ai";
 import {
   Close,
   Visibility,
@@ -23,51 +18,17 @@ import {
   ArrowDownward,
   ArrowUpward,
 } from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import { useAuth } from "../../utils/hooks";
-import Pagination from "../../components/UI/Pagination";
 import { useRouter } from "next/router";
-import { $windowExists, listFromDict } from "../../utils";
-import {
-  invoiceSelector,
-  fetchInvoices,
-} from "../../store/slices/invoiceSlice";
+
 import styled from "@emotion/styled";
 import ViewDetails from "../UI/ViewDetails";
-import Notify from "../../components/Input/Notify";
 import ToolTip from "../UI/Tooltip";
-import SearchBar from "../UI/SearchBar";
-import CustomSelect from "../UI/CustomSelect";
-const allStatus = [
-  {
-    value: "ORDERED",
-    label: "ORDERED",
-  },
-  {
-    value: "CONFIRMED",
-    label: "CONFIRMED",
-  },
-  {
-    value: "RECEIVED",
-    label: "RECEIVED",
-  },
-  {
-    value: "PARTIALY CONFIRMED",
-    label: "PARTIALY CONFIRMED",
-  },
-  {
-    value: "PARTIALLY RECEIVED",
-    label: "PARTIALLY RECEIVED",
-  },
-];
+import { listFromDict } from "../../utils";
 
 const InvoiceTable = (props) => {
-  const [status, setStatus] = useState("ALL");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
-  const route = useRouter();
   const [sortKeys, setSortKeys] = useState({
     invoiceDate: 1,
     invoiceNumber: 1,
@@ -80,10 +41,8 @@ const InvoiceTable = (props) => {
   const [selectedColumnKey, setSelectedColumnKey] = useState("");
   const [selectedHeading, setSelectedHeading] = useState("");
   const isXs = useMediaQuery("(max-width:1360px)");
-  const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-export const $baseURL = "https://erp.qwickbit.com/api"; //"http://localhost:8000"  //;
-
 export const $axios = axios;
 
 export const backgroundColor = [

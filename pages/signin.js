@@ -1,20 +1,12 @@
 import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import * as Yup from "yup";
-import Link from "next/link";
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Formik, Form, Field } from "formik";
-import TextFieldWrapper from "../components/Input/TextFieldWrapper";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useState } from "react";
-import { $axios, $baseURL } from "../components/axios/axios";
 import { useRouter } from "next/router";
 import { CgSpinner } from "react-icons/cg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { data } from "autoprefixer";
-import Head from "next/head";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/slices/authSlice";
 
 const formValidation = Yup.object().shape({
   email: Yup.string().email("Invalid Email").required("Email required"),
@@ -129,7 +121,6 @@ const signin = () => {
               </Link>
             </p>
           </div> */}
-          x
         </div>
       </div>
     </>

@@ -1,25 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  CircularProgress,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
-import { allCountry } from "../components/axios/axios";
-import {
-  checkSingleUser,
-  setLoading,
-  updateAccount,
-} from "../store/slices/authSlice";
-import { AiOutlineSearch } from "react-icons/ai";
-import { getOrganizations } from "../store/slices/orgSlice";
+import { Avatar, Button, CircularProgress, TextField } from "@mui/material";
+
 import { toast } from "react-toastify";
 
 const formValidation = Yup.object().shape({

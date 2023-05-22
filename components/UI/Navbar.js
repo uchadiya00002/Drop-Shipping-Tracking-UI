@@ -1,32 +1,11 @@
-import {
-  Avatar,
-  Badge,
-  Button,
-  Drawer,
-  IconButton,
-  InputAdornment,
-  Menu,
-  MenuItem,
-  TextField,
-} from "@mui/material";
+import { Avatar, Badge, Drawer, Menu, MenuItem } from "@mui/material";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 
-import {
-  AiFillHome,
-  AiFillPrinter,
-  AiFillBell,
-  AiTwotoneSetting,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiFillBell } from "react-icons/ai";
 import Notifications from "./Notifications";
 import SideSection from "./SideSection";
-import Layout from "./Layout";
-import { useDispatch, useSelector } from "react-redux";
-import { checkSingleUser, logoutUser } from "../../store/slices/authSlice";
-import { useEffect } from "react";
-import { FaUserAlt } from "react-icons/fa";
-import { KeyboardArrowDown, Person } from "@mui/icons-material";
+
 import { useRouter } from "next/router";
 
 const Navbar = () => {

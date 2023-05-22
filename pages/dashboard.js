@@ -1,7 +1,5 @@
-import { Button, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Widget from "../components/UI/Widget";
-import { useAuth } from "../utils/hooks";
 import {
   ShoppingCartOutlined,
   DescriptionOutlined,
@@ -15,47 +13,10 @@ import DognutContainer from "../components/chart/DognutContainer";
 import CriticalPartChart from "../components/chart/CriticalPartChart";
 import moment from "moment";
 import ReasonBar from "../components/chart/ReasonBar";
-import DelayedOrdersChart from "../components/chart/DelayedOrdersChart";
 import BarGraph from "../components/chart/barGraph";
 
-const home = () => {
-  const currentHour = moment().hour();
-  const [startDate, setStartDate] = useState(
-    moment().startOf("year").format("YYYY-MM-DD")
-  );
-  const [endDate, setEndDate] = useState(
-    moment().add(1, "y").startOf("year").format("YYYY-MM-DD")
-  );
-  const [selectedStatus, setSelectedStatus] = useState("THIS YEAR");
-  const [count, setCount] = useState(0);
-  const [greetingStatus, setGreetingStatus] = useState("Welcome");
+const Dashboard = () => {
   const route = useRouter();
-  const isLg = useMediaQuery("(min-width:1500px)");
-  const [w, setW] = useState();
-  const handleGreeting = async () => {
-    if (currentHour >= 3 && currentHour < 12) {
-      setGreetingStatus("Good Morning");
-    } else if (currentHour >= 12 && currentHour < 15) {
-      setGreetingStatus("Good Afternoon");
-    } else if (currentHour >= 15 && currentHour < 20) {
-      setGreetingStatus("Good Evening");
-    } else {
-      setGreetingStatus("Welcome");
-    }
-  };
-
-  // document.addEventListener('visibilitychange',e=>{
-  //   window.location.href = route.pathname
-  //   // e.preventDefault()
-  // })
-
-  // document.addEventListener('focus',e=>{
-  //   alert("XYZ")
-  // })
-
-  // document.addEventListener('contextmenu',e=>{
-  //   e.preventDefault()
-  // })
 
   return (
     <div className=" bg-[#E5E5E5] flex flex-col px-3 pb-5 grow ">
@@ -155,7 +116,7 @@ const home = () => {
               </Button> */}
             </div>
             <div>
-              <CriticalPartChart count={count} />
+              <CriticalPartChart />
             </div>
           </div>
         </div>
@@ -189,4 +150,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Dashboard;

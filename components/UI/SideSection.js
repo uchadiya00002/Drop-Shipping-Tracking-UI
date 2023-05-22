@@ -2,22 +2,10 @@ import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Avatar } from "@mui/material";
-import { AiFillHome, AiTwotoneSetting } from "react-icons/ai";
-import {
-  MdDashboard,
-  MdShoppingBag,
-  MdOutlineCancelPresentation,
-  MdLogout,
-} from "react-icons/md";
+import { MdDashboard, MdShoppingBag } from "react-icons/md";
 import { FaReceipt, FaUserAlt } from "react-icons/fa";
-import { RiUserSettingsFill } from "react-icons/ri";
-import { BsFillDoorOpenFill, BsFillChatLeftFill } from "react-icons/bs";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../store/slices/authSlice";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
-import { Article, Info, SwapHorizontalCircle } from "@mui/icons-material";
 
 const items = [
   // {

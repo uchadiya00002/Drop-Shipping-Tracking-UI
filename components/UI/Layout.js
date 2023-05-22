@@ -1,18 +1,10 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import Navbar from "./Navbar";
 import SideSection from "./SideSection";
-import { getMessaging, onMessage, getToken } from "firebase/messaging";
-import firebaseApp from "../../utils/firebase-init";
-import { $hasWindow } from "../../utils/http";
-import { $axios, $baseURL } from "../axios/axios";
 
 export default function Layout({ ...props }) {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [FCMToken, setToken] = useState("");
   const router = useRouter();
-  let isNavActive = true;
 
   const currentRoutes = [
     "/",

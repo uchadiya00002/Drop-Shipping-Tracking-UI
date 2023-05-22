@@ -11,17 +11,12 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
-import { RiFilterLine } from "react-icons/ri";
 import { FiTrash } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
 
-import { $axios, $baseURL } from "../axios/axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ToolTip from "./Tooltip";
 import moment from "moment/moment";
 import { Close } from "@mui/icons-material";

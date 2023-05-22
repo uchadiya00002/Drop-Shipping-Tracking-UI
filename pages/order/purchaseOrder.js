@@ -1,24 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  MenuItem,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Button,
-  CircularProgress,
-  Menu,
-} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useAuth } from "../../utils/hooks";
-import Pagination from "../../components/UI/Pagination";
+import React, { useState } from "react";
+import { Button } from "@mui/material";
 import { useRouter } from "next/router";
-import { $windowExists, listFromDict } from "../../utils";
-import CriticalOrders from "../../components/Tables/CriticalOrders";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PurchaseOrders from "../../components/Tables/PurchaseOrders";
-import { FileDownloadOutlined } from "@mui/icons-material";
-import { exportOrder } from "../../store/slices/orderSlice";
-import { $axios, $baseURL } from "../../components/axios/axios";
 
 const allStatus = [
   {
@@ -98,7 +81,7 @@ const purchaseOrder = (props) => {
         </Button> */}
       </div>
       <div>
-        {type == "Purchase Order" ? <PurchaseOrders /> : <CriticalOrders />}
+        <PurchaseOrders />
       </div>
 
       {/* <Menu

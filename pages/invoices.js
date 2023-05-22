@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MenuItem, Button, Menu } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { useAuth } from "../utils/hooks";
 import { useRouter } from "next/router";
-import { $windowExists } from "../utils";
 import InvoiceTable from "../components/Tables/InvoiceTable";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import AgingReport from "../components/Tables/AgingReport";
-import { exportInvoice } from "../store/slices/invoiceSlice";
-import { FileDownloadOutlined } from "@mui/icons-material";
-import { $axios, $baseURL } from "../components/axios/axios";
 
 const invoices = (props) => {
   const [type, setType] = useState("Invoices");
@@ -23,29 +14,11 @@ const invoices = (props) => {
   };
   const route = useRouter();
 
-  const handleExport = async (poNumber) => {
-    try {
-      let response = await $axios({
-        url: `${$baseURL}/invoice/export`,
-        method: "POST",
-        // data: payload,
-        responseType: "blob",
-      });
-
-      const blob = await response.data;
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "Invoice.csv";
-      link.click();
-      setTimeout(() => URL.revokeObjectURL(link.href), 0);
-    } catch (error) {}
-  };
-
   return (
     <div className="w-full bg-[#E5E5E5] xs:min-h-screen grow flex flex-col px-5  ">
       <div className="flex items-center py-5 lg:py-2 text-xl bg-[#E5E5E5] overflow-auto drawer-open reduce-wid  drawer-close smooth fixed z-[3]">
         <span className="text-black font-bold text-2xl">Invoices</span>
-        <Button
+        {/* <Button
           onClick={() => handleExport()}
           className="ml-auto normal-case "
           startIcon={<FileDownloadOutlined />}
@@ -57,7 +30,7 @@ const invoices = (props) => {
           }}
         >
           Export
-        </Button>
+        </Button> */}
       </div>
       <div>
         <InvoiceTable />
