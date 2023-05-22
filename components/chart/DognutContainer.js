@@ -62,9 +62,7 @@ const DognutContainer = ({ count }) => {
         bottom: 0,
       },
     },
-    onClick: (evt, item) => {
-      printElementAtEvent(item);
-    },
+
     cutout: "60%",
     scales: {
       percentage: {

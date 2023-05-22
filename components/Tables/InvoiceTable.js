@@ -73,10 +73,7 @@ const InvoiceTable = (props) => {
     { label: "PAYMENT DUE DATE", key: "paymentDueDate" },
     { label: "PAYMENT TERMS" },
     { label: "PAYMENT STATUS" },
-    { label: "GROUP CODE" },
-    { label: "ORG CODE" },
-    { label: "COMPANY CODE" },
-    { label: "PLANT NAME" },
+
     { label: "PRICE", key: "totalPrice" },
     { label: "CURRENCY" },
     {
@@ -84,19 +81,160 @@ const InvoiceTable = (props) => {
     },
   ];
 
-  const invoices = ["ddd", "ddd", "ddd", "ddd", "ddd", "ddd"];
+  const invoices = [
+    {
+      invoiceDate: "2023-05-01",
+      invoiceNumber: "INV001",
+      orderNo: "ORD001",
+      supplierId: "SUP001",
+      supplierName: "Supplier A",
+      orderStatus: "Pending",
+      receivedDate: "2023-05-05",
+      paymentDueDate: "2023-06-05",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 100,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-02",
+      invoiceNumber: "INV002",
+      orderNo: "ORD002",
+      supplierId: "SUP002",
+      supplierName: "Supplier B",
+      orderStatus: "Approved",
+      receivedDate: "2023-05-06",
+      paymentDueDate: "2023-06-06",
+      paymentTerms: "Net 30",
+      paymentStatus: "Paid",
+      price: 200,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-03",
+      invoiceNumber: "INV003",
+      orderNo: "ORD003",
+      supplierId: "SUP003",
+      supplierName: "Supplier C",
+      orderStatus: "Rejected",
+      receivedDate: "2023-05-07",
+      paymentDueDate: "2023-06-07",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 150,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-04",
+      invoiceNumber: "INV004",
+      orderNo: "ORD004",
+      supplierId: "SUP004",
+      supplierName: "Supplier D",
+      orderStatus: "Pending",
+      receivedDate: "2023-05-08",
+      paymentDueDate: "2023-06-08",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 180,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-05",
+      invoiceNumber: "INV005",
+      orderNo: "ORD005",
+      supplierId: "SUP005",
+      supplierName: "Supplier E",
+      orderStatus: "Approved",
+      receivedDate: "2023-05-09",
+      paymentDueDate: "2023-06-09",
+      paymentTerms: "Net 30",
+      paymentStatus: "Paid",
+      price: 250,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-01",
+      invoiceNumber: "INV001",
+      orderNo: "ORD001",
+      supplierId: "SUP001",
+      supplierName: "Supplier A",
+      orderStatus: "Pending",
+      receivedDate: "2023-05-05",
+      paymentDueDate: "2023-06-05",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 100,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-02",
+      invoiceNumber: "INV002",
+      orderNo: "ORD002",
+      supplierId: "SUP002",
+      supplierName: "Supplier B",
+      orderStatus: "Approved",
+      receivedDate: "2023-05-06",
+      paymentDueDate: "2023-06-06",
+      paymentTerms: "Net 30",
+      paymentStatus: "Paid",
+      price: 200,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-03",
+      invoiceNumber: "INV003",
+      orderNo: "ORD003",
+      supplierId: "SUP003",
+      supplierName: "Supplier C",
+      orderStatus: "Rejected",
+      receivedDate: "2023-05-07",
+      paymentDueDate: "2023-06-07",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 150,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-04",
+      invoiceNumber: "INV004",
+      orderNo: "ORD004",
+      supplierId: "SUP004",
+      supplierName: "Supplier D",
+      orderStatus: "Pending",
+      receivedDate: "2023-05-08",
+      paymentDueDate: "2023-06-08",
+      paymentTerms: "Net 30",
+      paymentStatus: "Unpaid",
+      price: 180,
+      currency: "USD",
+    },
+    {
+      invoiceDate: "2023-05-05",
+      invoiceNumber: "INV005",
+      orderNo: "ORD005",
+      supplierId: "SUP005",
+      supplierName: "Supplier E",
+      orderStatus: "Approved",
+      receivedDate: "2023-05-09",
+      paymentDueDate: "2023-06-09",
+      paymentTerms: "Net 30",
+      paymentStatus: "Paid",
+      price: 250,
+      currency: "USD",
+    },
+  ];
 
   const listFields = listFromDict({
     invoiceDate: { name: "invoice Date" },
     invoiceNumber: { name: "invoice Number" },
     orderNo: { name: "order Number" },
     supplierId: { name: "supplier Id" },
-    supplierFields: { name: "supplier fields" },
+    supplierName: { name: "supplier Name" },
     orderStatus: { name: "order Status" },
     paymentDueDate: { name: "payment Due Date" },
     paymentTerms: { name: "payment terms" },
     paymentStatus: { name: "payment status" },
-    followUpStatus: { name: "follow up Status" },
+    // followUpStatus: { name: "follow up Status" },
   });
 
   return (
@@ -275,22 +413,14 @@ const InvoiceTable = (props) => {
                       }}
                       align="left"
                     >
-                      {item?.orderStatus === "CONFIRMED" ? (
-                        <span className="text-[#00AA57]">CONFIRMED</span>
-                      ) : item?.orderStatus === "ORDERED" ? (
-                        <span className="text-[#3ED331]">ORDERED</span>
-                      ) : item?.orderStatus === "PARTIALY CONFIRMED" ? (
-                        <span className="text-[#3ED331]">
-                          PARTIALY CONFIRMED
-                        </span>
-                      ) : item?.orderStatus === "PARTIALLY RECEIVED" ? (
-                        <span className="text-[#3ED331]">
-                          PARTIALLY RECEIVED
-                        </span>
-                      ) : item?.orderStatus === "RECEIVED" ? (
-                        <span className="text-[#3ED331]">RECEIVED</span>
+                      {item?.orderStatus === "Rejected" ? (
+                        <span className="text-[#FF1212]">REJECTED</span>
+                      ) : item?.orderStatus === "Pending" ? (
+                        <span className="text-[#ecd43b]">PENDING</span>
+                      ) : item?.orderStatus === "Approved" ? (
+                        <span className="text-[#3ED331]">APPROVED</span>
                       ) : (
-                        item?.orderStatus
+                        item?.orderStatus?.toUpperCase()
                       )}
                     </StyledTableCell>
                     <StyledTableCell
@@ -323,10 +453,10 @@ const InvoiceTable = (props) => {
                       }}
                       align="left"
                     >
-                      {item?.paymentStatus === "COMPLETED" ? (
-                        <span className="text-[#00AA57]">COMPLETED</span>
-                      ) : item?.paymentStatus === "PENDING" ? (
-                        <span className="text-[#FF3838]">PENDING</span>
+                      {item?.paymentStatus === "Paid" ? (
+                        <span className="text-[#00AA57]">PAID</span>
+                      ) : item?.paymentStatus === "Unpaid" ? (
+                        <span className="text-[#FF3838]">UNPIAD</span>
                       ) : item?.paymentStatus === "PARTIALLY PAID" ? (
                         <span className="text-[#7B61FF]">PARTIALLY PAID</span>
                       ) : item?.paymentStatus ? (
@@ -335,45 +465,14 @@ const InvoiceTable = (props) => {
                         "NA"
                       )}
                     </StyledTableCell>
+
                     <StyledTableCell
                       style={{
                         padding: isXs ? "8px 16px" : "12px 16px",
                       }}
                       align="left"
                     >
-                      {item?.groupCode ? item?.groupCode : "NA"}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      style={{
-                        padding: "8px 16px",
-                      }}
-                      align="left"
-                    >
-                      {item?.orgCode ? item?.orgCode : "NA"}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      style={{
-                        padding: "8px 16px",
-                      }}
-                      align="left"
-                    >
-                      {item?.companyCode ? item?.companyCode : "NA"}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      style={{
-                        padding: isXs ? "8px 16px" : "12px 16px",
-                      }}
-                      align="left"
-                    >
-                      {item?.plantName ? item?.plantName : "NA"}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      style={{
-                        padding: isXs ? "8px 16px" : "12px 16px",
-                      }}
-                      align="left"
-                    >
-                      {item?.totalPrice ? item?.totalPrice : "NA"}
+                      {item?.price ? item?.price : "NA"}
                     </StyledTableCell>
                     <StyledTableCell
                       style={{

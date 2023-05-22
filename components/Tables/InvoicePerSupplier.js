@@ -143,14 +143,7 @@ const InvoicePerSupplier = () => {
                     {listHeadings?.map((h, index) => {
                       return (
                         <StyledTableCell
-                          className={`whitespace-nowrap ${
-                            index == 0 && "sticky left-0 top-0 z-[10]"
-                          }
-                          
-                          ${
-                            index == 1 &&
-                            "sticky left-[7.07rem] lg:left-[6.2rem] md:left-[5.1rem] z-[10]"
-                          }
+                          className={`whitespace-nowrap 
                           `}
                         >
                           {h}
@@ -163,7 +156,7 @@ const InvoicePerSupplier = () => {
                   {result?.map((invoice, index) => (
                     <StyledTableRow key={index} className="whitespace-nowrap">
                       <StyledTableCell
-                        className="sticky left-0 top-0 z-[5] bg-[white]"
+                        className=""
                         align="center"
                         style={{
                           padding: "8px 18px",
@@ -176,7 +169,7 @@ const InvoicePerSupplier = () => {
                         style={{
                           padding: "8px 18px",
                         }}
-                        className="sticky left-[7.07rem] lg:left-[6.2rem] md:left-[5.1rem] z-[5] bg-[white]"
+                        className="z-[5] bg-[white]"
                       >
                         {invoice?.supplierName ? invoice?.supplierName : "NA"}
                       </StyledTableCell>

@@ -150,20 +150,9 @@ const OrderPerSupplier = () => {
                     {listHeadingsForOrder.map((h, index) => {
                       return (
                         <StyledTableCell
-                          className={`whitespace-nowrap ${
-                            index == 0 && "sticky left-0 top-0 z-[10]"
-                          }
-                          
-                          ${
-                            index == 1 &&
-                            "sticky left-[7.07rem] lg:left-[6.2rem] md:left-[5.1rem] z-[10]"
-                          }
+                          className={`whitespace-nowrap 
                           `}
-                          // style={{
-                          //   padding: "8px 18px",
-                          // }}
                         >
-                          {/* <span className="text-xs"></span> */}
                           {h}
                         </StyledTableCell>
                       );
@@ -173,15 +162,12 @@ const OrderPerSupplier = () => {
                 <TableBody className="">
                   {orders.map((order, index) => (
                     <StyledTableRow className="whitespace-nowrap " key={index}>
-                      <StyledTableCell
-                        align="center"
-                        className="sticky left-0 top-0 z-[5] bg-[white]"
-                      >
+                      <StyledTableCell align="center" className="">
                         {order?.supplierId ? order?.supplierId : "NA"}
                       </StyledTableCell>
                       <StyledTableCell
-                        align="left"
-                        className="sticky left-[7.07rem] lg:left-[6.2rem] md:left-[5.1rem] text-sm z-[5] bg-[white]"
+                        align="center"
+                        className=" text-sm z-[5] bg-[white]"
                       >
                         {order?.supplierName ? order?.supplierName : "NA"}
                       </StyledTableCell>

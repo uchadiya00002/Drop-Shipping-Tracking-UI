@@ -3,9 +3,10 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { MdDashboard, MdShoppingBag } from "react-icons/md";
-import { FaReceipt, FaUserAlt } from "react-icons/fa";
+import { FaDoorOpen, FaReceipt, FaUserAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
+import { SwapHorizontalCircle } from "@mui/icons-material";
 
 const items = [
   // {
@@ -39,30 +40,29 @@ const items = [
     otherRoute: "/agingReport",
   },
 
-  // {
-  //   id: 6,
-  //   name: "Collaboration Room",
-  //   icon: <BsFillDoorOpenFill />,
-  //   route: "/collaborationRoom",
-  //   val: "/collaborationRoom",
-  //   otherRoute: "/collabRoom",
-  // },
+  {
+    id: 6,
+    name: "Inventory",
+    icon: <FaDoorOpen />,
+    route: "/inventory",
+    val: "/inventory",
+    // otherRoute: "/collabRoom",
+  },
 
-  // {
-  //   id: 9,
-  //   name: "Transactional Data",
-  //   icon: <SwapHorizontalCircle />,
-  //   route: "/transactionalData",
-  //   val: "/transactionalData",
-  // },
+  {
+    id: 9,
+    name: "Transactional Data",
+    icon: <SwapHorizontalCircle />,
+    route: "/transaction",
+  },
 
-  // {
-  //   id: 11,
-  //   name: "Account",
-  //   icon: <FaUserAlt />,
-  //   route: "/account",
-  //   val: "/account",
-  // },
+  {
+    id: 11,
+    name: "Profile",
+    icon: <FaUserAlt />,
+    route: "/account",
+    val: "/account",
+  },
 ];
 
 const SideSection = ({

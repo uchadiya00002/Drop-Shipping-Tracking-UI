@@ -123,74 +123,199 @@ const PurchaseOrders = (props) => {
   const StyledTableRow = styled(TableRow)(({ theme }) => ({}));
   const orders = [
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD001",
+      orderDate: "2023-05-18",
+      description: "Lorem ipsum dolor sit amet",
+      supplierId: "SUP001",
+      supplierName: "Supplier A",
+      deliveryDate: "2023-05-25",
+      status: "Pending",
+      lineItems: [
+        { item: "Product A", quantity: 5 },
+        { item: "Product B", quantity: 10 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD002",
+      orderDate: "2023-05-19",
+      description: "Consectetur adipiscing elit",
+      supplierId: "SUP002",
+      supplierName: "Supplier B",
+      deliveryDate: "2023-05-26",
+      status: "Approved",
+      lineItems: [
+        { item: "Product C", quantity: 3 },
+        { item: "Product D", quantity: 8 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD003",
+      orderDate: "2023-05-20",
+      description: "Duis aute irure dolor in reprehenderit",
+      supplierId: "SUP003",
+      supplierName: "Supplier C",
+      deliveryDate: "2023-05-27",
+      status: "Rejected",
+      lineItems: [
+        { item: "Product E", quantity: 2 },
+        { item: "Product F", quantity: 4 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD004",
+      orderDate: "2023-05-21",
+      description: "Excepteur sint occaecat cupidatat non proident",
+      supplierId: "SUP004",
+      supplierName: "Supplier D",
+      deliveryDate: "2023-05-28",
+      status: "Pending",
+      lineItems: [
+        { item: "Product G", quantity: 6 },
+        { item: "Product H", quantity: 12 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD005",
+      orderDate: "2023-05-22",
+      description: "Sed ut perspiciatis unde omnis iste natus error",
+      supplierId: "SUP005",
+      supplierName: "Supplier E",
+      deliveryDate: "2023-05-29",
+      status: "Approved",
+      lineItems: [
+        { item: "Product I", quantity: 4 },
+        { item: "Product J", quantity: 7 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD006",
+      orderDate: "2023-05-23",
+      description: "Nemo enim ipsam voluptatem quia voluptas",
+      supplierId: "SUP006",
+      supplierName: "Supplier F",
+      deliveryDate: "2023-05-30",
+      status: "Pending",
+      lineItems: [
+        { item: "Product K", quantity: 3 },
+        { item: "Product L", quantity: 9 },
+      ],
     },
     {
-      poNumber: "ff",
-      orderDate: "ff",
-      description: "ff",
-      supplierId: "sss",
-      supplierName: "sss",
-      deliveryDate: "aaa",
-      status: "aaa",
-      totalItems: "ddd",
+      poNumber: "ORD007",
+      orderDate: "2023-05-24",
+      description: "Ut enim ad minima veniam, quis nostrum exercitationem",
+      supplierId: "SUP007",
+      supplierName: "Supplier G",
+      deliveryDate: "2023-05-31",
+      status: "Rejected",
+      lineItems: [
+        { item: "Product M", quantity: 2 },
+        { item: "Product N", quantity: 5 },
+      ],
+    },
+    {
+      poNumber: "ORD008",
+      orderDate: "2023-05-25",
+      description: "At vero eos et accusamus et iusto odio",
+      supplierId: "SUP008",
+      supplierName: "Supplier H",
+      deliveryDate: "2023-06-01",
+      status: "Approved",
+      lineItems: [
+        { item: "Product O", quantity: 7 },
+        { item: "Product P", quantity: 11 },
+      ],
+    },
+    {
+      poNumber: "ORD009",
+      orderDate: "2023-05-26",
+      description: "Temporibus autem quibusdam et aut officiis",
+      supplierId: "SUP009",
+      supplierName: "Supplier I",
+      deliveryDate: "2023-06-02",
+      status: "Pending",
+      lineItems: [
+        { item: "Product Q", quantity: 4 },
+        { item: "Product R", quantity: 8 },
+      ],
+    },
+    {
+      poNumber: "ORD010",
+      orderDate: "2023-05-27",
+      description: "Sint et expedita distinctio blanditiis",
+      supplierId: "SUP010",
+      supplierName: "Supplier J",
+      deliveryDate: "2023-06-03",
+      status: "Approved",
+      lineItems: [
+        { item: "Product S", quantity: 3 },
+        { item: "Product T", quantity: 6 },
+      ],
+    },
+    {
+      poNumber: "ORD011",
+      orderDate: "2023-05-28",
+      description: "Voluptatem accusantium doloremque laudantium",
+      supplierId: "SUP011",
+      supplierName: "Supplier K",
+      deliveryDate: "2023-06-04",
+      status: "Rejected",
+      lineItems: [
+        { item: "Product U", quantity: 2 },
+        { item: "Product V", quantity: 4 },
+      ],
+    },
+    {
+      poNumber: "ORD012",
+      orderDate: "2023-05-29",
+      description: "Totam rem aperiam, eaque ipsa quae ab",
+      supplierId: "SUP012",
+      supplierName: "Supplier L",
+      deliveryDate: "2023-06-05",
+      status: "Pending",
+      lineItems: [
+        { item: "Product W", quantity: 5 },
+        { item: "Product X", quantity: 10 },
+      ],
+    },
+    {
+      poNumber: "ORD013",
+      orderDate: "2023-05-30",
+      description: "Inventore veritatis et quasi architecto beatae",
+      supplierId: "SUP013",
+      supplierName: "Supplier M",
+      deliveryDate: "2023-06-06",
+      status: "Approved",
+      lineItems: [
+        { item: "Product Y", quantity: 3 },
+        { item: "Product Z", quantity: 7 },
+      ],
+    },
+    {
+      poNumber: "ORD014",
+      orderDate: "2023-05-31",
+      description: "Nemo enim ipsam voluptatem quia voluptas",
+      supplierId: "SUP014",
+      supplierName: "Supplier N",
+      deliveryDate: "2023-06-07",
+      status: "Pending",
+      lineItems: [
+        { item: "Product AA", quantity: 2 },
+        { item: "Product BB", quantity: 4 },
+      ],
+    },
+    {
+      poNumber: "ORD015",
+      orderDate: "2023-06-01",
+      description: "Ut enim ad minima veniam, quis nostrum exercitationem",
+      supplierId: "SUP015",
+      supplierName: "Supplier O",
+      deliveryDate: "2023-06-08",
+      status: "Rejected",
+      lineItems: [
+        { item: "Product CC", quantity: 6 },
+        { item: "Product DD", quantity: 12 },
+      ],
     },
   ];
 
@@ -223,13 +348,9 @@ const PurchaseOrders = (props) => {
                         className={`
                        ${h?.label === "CRITICAL PARTS" && "text-center"} ${
                           h?.key && "whitespace-nowrap cursor-pointer"
-                        } ${index == 0 && "z-[10] sticky left-0 top-0"}
+                        } 
                     whitespace-nowrap
-                          ${
-                            index == 1
-                              ? "z-[10] sticky top-0 left-[75.2px]"
-                              : ""
-                          }
+                          
                             `}
                         key={index}
                         style={{
@@ -237,26 +358,7 @@ const PurchaseOrders = (props) => {
                         }}
                       >
                         <ToolTip title={h?.key ? "Sort" : ""}>
-                          <div>
-                            {h?.label}
-                            {h?.key && selectedHeading?.label == h?.label ? (
-                              sortKeys[selectedColumnKey] == -1 ? (
-                                <ArrowDownward
-                                  fontSize="small"
-                                  className="ml-2 text-[#03045E]"
-                                />
-                              ) : sortKeys[selectedColumnKey] == 1 ? (
-                                <ArrowUpward
-                                  fontSize="small"
-                                  className="ml-2 text-[#03045E]"
-                                />
-                              ) : (
-                                sortKeys[selectedColumnKey] == 0 && ""
-                              )
-                            ) : (
-                              h?.key && ""
-                            )}
-                          </div>
+                          <div>{h?.label}</div>
                         </ToolTip>
                       </StyledTableCell>
                     );
@@ -270,7 +372,7 @@ const PurchaseOrders = (props) => {
                     className="whitespace-nowrap"
                   >
                     <StyledTableCell
-                      className="z-[5] sticky left-0 bg-[white]"
+                      className=" bg-[white]"
                       component="th"
                       align="left"
                       scope="row"
@@ -288,7 +390,7 @@ const PurchaseOrders = (props) => {
                         padding: isXs ? "6px 14px" : "13px 14px",
                       }}
                       align="left"
-                      className="z-[5] sticky left-[75.2px] bg-[white]"
+                      className=" bg-[white]"
                     >
                       {orderDetail?.orderDate ? orderDetail?.orderDate : "NA"}
                     </StyledTableCell>
@@ -345,32 +447,12 @@ const PurchaseOrders = (props) => {
                       }}
                       align="left"
                     >
-                      {orderDetail?.status === "REJECTED" ? (
+                      {orderDetail?.status === "Rejected" ? (
                         <span className="text-[#FF1212]">REJECTED</span>
-                      ) : orderDetail?.status === "CONFIRMED" ? (
-                        <span className="text-[#3ED331]">CONFIRMED</span>
-                      ) : orderDetail?.status === "ORDERED" ? (
-                        <span className="text-[#3ED331]">ORDERED</span>
-                      ) : orderDetail?.status === "PARTIALLY REJECTED" ? (
-                        <span className="text-[#FF1212]">
-                          PARTIALLY REJECTED
-                        </span>
-                      ) : orderDetail?.status === "PARTIALLY CONFIRMED" ? (
-                        <span className="text-[#3ED331]">
-                          PARTIALLY CONFIRMED
-                        </span>
-                      ) : orderDetail?.status === "RECEIVING" ? (
-                        <span className="text-[#3ED331]">RECEIVING</span>
-                      ) : orderDetail?.status === "PARTIALLY RECEIVED" ? (
-                        <span className="text-[#3ED331]">
-                          PARTIALLY RECEIVED
-                        </span>
-                      ) : orderDetail?.status === "SHIPPED" ? (
-                        <span className="text-[#90EE90]">SHIPPED</span>
-                      ) : orderDetail?.status === "PARTIALLY SHIPPED" ? (
-                        <span className="text-[#90EE90]">
-                          PARTIALLY SHIPPED
-                        </span>
+                      ) : orderDetail?.status === "Pending" ? (
+                        <span className="text-[#ecd43b]">PENDING</span>
+                      ) : orderDetail?.status === "Approved" ? (
+                        <span className="text-[#3ED331]">APPROVED</span>
                       ) : (
                         orderDetail?.status?.toUpperCase()
                       )}
@@ -387,7 +469,9 @@ const PurchaseOrders = (props) => {
                               : orderDetail?.totalItems
                               ? orderDetail?.totalItems
                               : ""} */}
-                        {orderDetail?.totalItems ? orderDetail?.totalItems : ""}
+                        {orderDetail?.lineItems?.length
+                          ? orderDetail?.lineItems?.length
+                          : ""}
                         {/* {console.log(orderDetail)} */}
                       </div>
                     </StyledTableCell>

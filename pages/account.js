@@ -20,7 +20,7 @@ const account = () => {
   const formikRef = useRef(null);
   const [userDetails, setUserDetails] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState("/images/itachi.jpg");
   const [loading, setLoading] = useState(false);
 
   const initialFormValues = {
@@ -53,7 +53,7 @@ const account = () => {
   };
 
   return (
-    <div className=" bg-[#E5E5E5] flex flex-col px-5 h-full md:h-screen py-2">
+    <div className=" bg-[#E5E5E5] flex flex-col px-5  grow  py-2">
       <h2 className="text-xl font-bold mb-1 ">Account</h2>
       <Formik
         initialValues={initialFormValues}
@@ -86,7 +86,7 @@ const account = () => {
                   <>
                     <Avatar
                       alt="Profile Picture"
-                      //  src={selectedImage?.url}
+                      // src=""
                       src={selectedImage}
                       className=" w-36 h-36 mb-1 mt-5"
                     />
@@ -130,7 +130,7 @@ const account = () => {
                   </>
                 )}
               </div>
-              <div className="bg-[white] ml-4 xs:mx-0 xs:w-full rounded-lg h-72 shadow-sm w-2/3  px-5 py-2">
+              <div className="bg-[white] ml-4 xs:mx-0 xs:w-full rounded-lg xs:h-full h-72 shadow-sm w-2/3  px-5 py-2">
                 <h2 className="text-xl font-semibold">Profile</h2>
                 <p className="text-sm font-normal text-[#65748B] mb-1">
                   The Information can be edited
@@ -140,7 +140,7 @@ const account = () => {
                     <CircularProgress />
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 w-full">
+                  <div className="grid grid-cols-2 xs:grid-cols-1 gap-x-6 gap-y-2 w-full">
                     <div className="mb-0.25">
                       <label className="text-sm font-medium">First Name</label>
                       <Field

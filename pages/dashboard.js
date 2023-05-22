@@ -28,7 +28,6 @@ const Dashboard = () => {
             icon={<ShoppingCartOutlined fontSize="12" />}
             number={10}
             subtitle="Total Orders"
-            handleClick={() => route.push("/transactionalData")}
           />
         </div>
         <div className="whitespace-nowrap w-full ">
@@ -37,15 +36,7 @@ const Dashboard = () => {
             title="Pending Orders"
             icon={<DescriptionOutlined fontSize="12" />}
             number={2}
-            subtitle="Delivery Date For Aprroval"
-            handleClick={() =>
-              route.push({
-                pathname: "/transactionalData",
-                query: {
-                  type: "PENDING",
-                },
-              })
-            }
+            subtitle="Approval Pending"
           />
         </div>
         <div className=" w-full">
@@ -54,15 +45,7 @@ const Dashboard = () => {
             title="Approved Orders"
             icon={<ThumbUpAltOutlined fontSize="12" />}
             number={6}
-            subtitle="New Delivery Date Approved"
-            handleClick={() =>
-              route.push({
-                pathname: "/transactionalData",
-                query: {
-                  type: "ACCEPTED",
-                },
-              })
-            }
+            subtitle="Approval Received"
           />
         </div>
         <div className="  w-full ">
@@ -71,15 +54,7 @@ const Dashboard = () => {
             title="Rejected Orders"
             icon={<ThumbDownAltOutlined fontSize="12" />}
             number={2}
-            subtitle="New Delivery Date Rejected"
-            handleClick={() =>
-              route.push({
-                pathname: "/transactionalData",
-                query: {
-                  type: "REJECTED",
-                },
-              })
-            }
+            subtitle="Approval Rejected"
           />
         </div>
       </div>
