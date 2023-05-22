@@ -1,1 +1,0 @@
-scp -i ~/Downloads/ireliefdev01\ \(1\).pem -r out/*  bitnami@3.110.105.224:~/htdocs/

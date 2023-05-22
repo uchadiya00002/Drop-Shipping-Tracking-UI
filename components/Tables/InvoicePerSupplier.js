@@ -28,27 +28,49 @@ const listHeadings = [
   "DELAYED",
   "DUE IN 7D",
   "DUE IN 7-14D",
-  "DUE IN 15-30D",
-  "DUE IN 30+",
+];
+const result = [
+  {
+    supplierId: "1234",
+    supplierName: "Wallmart",
+    forPayment: 4,
+    delay: 4,
+    dueIn7d: 1,
+    dueIn7To14d: 2,
+  },
+  {
+    supplierId: "1234",
+    supplierName: "Wallmart",
+    forPayment: 4,
+    delay: 4,
+    dueIn7d: 1,
+    dueIn7To14d: 2,
+  },
+  {
+    supplierId: "1234",
+    supplierName: "Wallmart",
+    forPayment: 4,
+    delay: 4,
+    dueIn7d: 1,
+    dueIn7To14d: 2,
+  },
+  {
+    supplierId: "1234",
+    supplierName: "Wallmart",
+    forPayment: 4,
+    delay: 4,
+    dueIn7d: 1,
+    dueIn7To14d: 2,
+  },
 ];
 
-const InvoicePerSupplier = ({
-  startDate,
-  endDate,
-  companyCode,
-  plantName,
-  groupCode,
-  orgCode,
-}) => {
-  const { user, fallBack } = useAuth();
-  const dispatch = useDispatch();
+const InvoicePerSupplier = () => {
   const [status, setStatus] = useState("ALL");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
-  const [result, setResult] = useState([]);
   const route = useRouter();
   const [type, setType] = useState("InvoicesPerSupplier");
 
@@ -77,85 +99,17 @@ const InvoicePerSupplier = ({
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({}));
 
-  useEffect(async () => {
-    if (user) {
-      if (user?.role == "SUPPLIER") {
-        route.push("/collaborationRoom");
-      }
-      getResults(startDate, endDate);
-    }
-  }, [
-    user,
-    type,
-    startDate,
-    endDate,
-    companyCode,
-    plantName,
-    groupCode,
-    orgCode,
-  ]);
-
-  const getResults = async (startDate, endDate) => {
-    setLoading(true);
-    try {
-      let conditions = {};
-
-      if (companyCode != "ALL") {
-        conditions.companyCode = companyCode;
-      }
-      if (plantName != "ALL") {
-        conditions.plantName = plantName;
-      }
-      if (groupCode != "ALL") {
-        conditions.groupCode = groupCode;
-      }
-      if (orgCode != "ALL") {
-        conditions.orgCode = orgCode;
-      }
-      if (startDate != "" && endDate != "") {
-        conditions.startDate = startDate;
-        conditions.endDate = endDate;
-      }
-
-      let payload = {
-        pagination: {
-          limit: 4,
-          page: 1,
-        },
-        conditions: conditions,
-      };
-
-      if (type == "InvoicesPerSupplier" && payload.conditions != {}) {
-        const res = await dispatch(invoiceReport(payload));
-        setResult(res.data);
-        setCount(res.count);
-      }
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!user) return;
-  }, [user]);
-
-  if (!$windowExists) {
-    return fallBack;
-  } else if (!user) {
-    // router.push('/')
-    return fallBack;
-  }
-
   return (
     <div className="bg-[white] rounded">
       <div className="flex flex-row px-5 xs:px-3 md:px-3 bg-[white] rounded">
         <div className="flex flex-col text-sm py-2">
-          <h2 className="text-base   font-semibold">Aging Report (Invoices)</h2>
-          Invoices Per Supplier
+          <h2 className="text-base   font-semibold">
+            Invoices Per Supplier
+            {/* Aging Report (Invoices) */}
+          </h2>
         </div>
 
-        <div className="ml-auto flex my-3 h-8">
+        {/* <div className="ml-auto flex my-3 h-8">
           <ToolTip title="View All">
             <Button
               className=" bg-[#03045E] hover:bg-[#0e106a] py-1  font-semibold normal-case  rounded ml-auto"
@@ -173,7 +127,7 @@ const InvoicePerSupplier = ({
               View All
             </Button>
           </ToolTip>
-        </div>
+        </div> */}
       </div>
 
       <div className="">
@@ -272,24 +226,6 @@ const InvoicePerSupplier = ({
                       >
                         {invoice?.dueIn7To14d ? invoice?.dueIn7To14d : "0"}
                       </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        style={{
-                          color: "green",
-                          padding: "8px 18px",
-                        }}
-                      >
-                        {invoice?.dueIn14To30d ? invoice?.dueIn14To30d : "0"}
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        style={{
-                          color: "green",
-                          padding: "8px 18px",
-                        }}
-                      >
-                        {invoice?.dueIn30dPlus ? invoice?.dueIn30dPlus : "0"}
-                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -313,7 +249,7 @@ const InvoicePerSupplier = ({
           </div>
         )}
         <div>
-          <p className="ml-auto mt-auto  pt-1 lg:text-sm xl:text-base md:text-sm sm:text-xs 2xl:text-base font-normal   text-end px-5">
+          <p className="ml-auto mt-auto invisible pt-1 lg:text-sm xl:text-base md:text-sm sm:text-xs 2xl:text-base font-normal   text-end px-5">
             Click View All to see More
           </p>
         </div>

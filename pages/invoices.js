@@ -12,7 +12,6 @@ import { FileDownloadOutlined } from "@mui/icons-material";
 import { $axios, $baseURL } from "../components/axios/axios";
 
 const invoices = (props) => {
-  const dispatch = useDispatch();
   const [type, setType] = useState("Invoices");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -23,7 +22,6 @@ const invoices = (props) => {
     setAnchorEl(null);
   };
   const route = useRouter();
-  const { user, fallBack } = useAuth();
 
   const handleExport = async (poNumber) => {
     try {
@@ -42,21 +40,6 @@ const invoices = (props) => {
       setTimeout(() => URL.revokeObjectURL(link.href), 0);
     } catch (error) {}
   };
-  useEffect(() => {
-    if (user) {
-      if (route.query.type) {
-        const type = route?.query?.type;
-        setType(type);
-      }
-    }
-  }, [user, route]);
-
-  if (!$windowExists) {
-    return fallBack;
-  } else if (!user) {
-    // router.push('/')
-    return fallBack;
-  }
 
   return (
     <div className="w-full bg-[#E5E5E5] xs:min-h-screen grow flex flex-col px-5  ">

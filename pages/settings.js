@@ -13,7 +13,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   checkSingleUser,
-  selectUser,
   setLoading,
   updateAccount,
   updatePassword,
@@ -32,13 +31,6 @@ const settings = () => {
   const [receiveNotifications, setReceiveNotifications] = useState(null);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
-  const user = useSelector(selectUser);
-  useEffect(() => {
-    if (user) {
-      handleCheckUser();
-    }
-  }, [user]);
 
   const handleUpdatePassword = async (values, fn) => {
     try {

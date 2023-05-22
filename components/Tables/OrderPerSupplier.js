@@ -14,11 +14,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { MdAspectRatio } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { deliveryReport } from "../../store/slices/invoiceSlice";
-import { $windowExists } from "../../utils";
-import { useAuth } from "../../utils/hooks";
+
 import ToolTip from "../UI/Tooltip";
 
 const listHeadingsForOrder = [
@@ -28,24 +24,11 @@ const listHeadingsForOrder = [
   "DELAYED",
   "DUE IN 7D",
   "DUE IN 7-14D",
-  "DUE IN 15-30D",
-  "DUE IN 30+",
 ];
 
-const OrderPerSupplier = ({
-  startDate,
-  endDate,
-  companyCode,
-  plantName,
-  groupCode,
-  orgCode,
-  limit,
-}) => {
-  const { user, fallBack } = useAuth();
-  const dispatch = useDispatch();
+const OrderPerSupplier = () => {
   const [count, setCount] = useState(0);
   const route = useRouter();
-  const [orders, setOrders] = useState([]);
   const [typeOrder, setTypeOrder] = useState("OrdersPerSupplier");
   const [loading, setLoading] = useState(false);
   const isLg = useMediaQuery("(min-width:1360px)");
@@ -64,103 +47,65 @@ const OrderPerSupplier = ({
     [`&.${tableCellClasses.body}`]: {
       fontSize: isXs ? 12 : 15,
       fontFamily: "Roboto",
+      // boxShadow: "none",
       padding: isXs ? "5px 10px" : "8px 18px",
       // fontFamily: "Gentium Book Plus",
     },
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({}));
-
-  useEffect(async () => {
-    if (user) {
-      if (user?.role == "SUPPLIER") {
-        route.push("/collaborationRoom");
-      }
-      getResults();
-    }
-  }, [
-    user,
-    typeOrder,
-    startDate,
-    endDate,
-    companyCode,
-    plantName,
-    groupCode,
-    orgCode,
-    route?.pathname,
-  ]);
-
-  const getResults = async () => {
-    setLoading(true);
-    try {
-      let conditions = {};
-
-      if (companyCode != "ALL") {
-        conditions.companyCode = companyCode;
-      }
-      if (plantName != "ALL") {
-        conditions.plantName = plantName;
-      }
-      if (groupCode != "ALL") {
-        conditions.groupCode = groupCode;
-      }
-      if (orgCode != "ALL") {
-        conditions.orgCode = orgCode;
-      }
-      if (startDate != "" && endDate != "") {
-        conditions.startDate = startDate;
-        conditions.endDate = endDate;
-      }
-
-      let payload = {
-        conditions: conditions,
-        pagination: {
-          limit: limit,
-          page: 1,
-        },
-      };
-
-      if (typeOrder == "OrdersPerSupplier" && payload.conditions != {}) {
-        const res = await dispatch(deliveryReport(payload));
-        if (res) {
-          setOrders(res.data);
-          setCount(res.count);
-        }
-      }
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!user) return;
-  }, [user]);
-
-  if (!$windowExists) {
-    return fallBack;
-  } else if (!user) {
-    // router.push('/')
-    return fallBack;
-  }
+  const orders = [
+    {
+      supplierId: "1234",
+      supplierName: "Wallmart",
+      forDelivery: 4,
+      delay: 4,
+      dueIn7d: 1,
+      dueIn7To14d: 2,
+    },
+    {
+      supplierId: "3545",
+      supplierName: "Best Buy",
+      forDelivery: 4,
+      delay: 4,
+      dueIn7d: 1,
+      dueIn7To14d: 2,
+    },
+    {
+      supplierId: "3573",
+      supplierName: "Ondoor",
+      forDelivery: 4,
+      delay: 4,
+      dueIn7d: 1,
+      dueIn7To14d: 2,
+    },
+    {
+      supplierId: "7543",
+      supplierName: "Dmart",
+      forDelivery: 4,
+      delay: 4,
+      dueIn7d: 1,
+      dueIn7To14d: 2,
+    },
+  ];
 
   return (
     <div className="bg-[white] rounded">
       <div className="flex flex-row px-5 xs:px-3 md:px-3 bg-[white] rounded">
         <div className="flex flex-col text-sm py-2">
           <h2 className="text-base   font-semibold">
-            Aging Report (Purchase Order)
+            Orders By Supplier
+            {/* Aging Report (Purchase Order) */}
           </h2>
-          Orders Per Supplier
         </div>
 
         <div className="ml-auto flex my-3 h-8">
           {route?.pathname == "/home" ? (
             <ToolTip title="Go to PO Dashboard">
               <Button
-                className=" bg-[#03045E] hover:bg-[#0e106a] p-0 mr-4 text-base font-semibold normal-case  rounded"
+                className=" bg-primary-bg p-0 text-base font-semibold normal-case  rounded"
                 variant="contained"
-                onClick={() => route.push("/dashboard")}
+                onClick={() => route.push("/order/purchaseOrder")}
                 style={{
                   padding: "4px",
                 }}
@@ -172,7 +117,7 @@ const OrderPerSupplier = ({
             <div className="ml-auto mr-4"></div>
           )}
 
-          <ToolTip title="View All">
+          {/* <ToolTip title="View All">
             <Button
               className={`bg-[#03045E] hover:bg-[#0e106a] py-1 whitespace-nowrap  font-semibold normal-case text-base   rounded`}
               variant="contained"
@@ -188,7 +133,7 @@ const OrderPerSupplier = ({
             >
               View All
             </Button>
-          </ToolTip>
+          </ToolTip> */}
         </div>
       </div>
       <div className="  ">
@@ -273,22 +218,6 @@ const OrderPerSupplier = ({
                       >
                         {order?.dueIn7To14d ? order?.dueIn7To14d : "0"}
                       </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        style={{
-                          color: "green",
-                        }}
-                      >
-                        {order?.dueIn14To30d ? order?.dueIn14To30d : "0"}
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="center"
-                        style={{
-                          color: "green",
-                        }}
-                      >
-                        {order?.dueIn30dPlus ? order?.dueIn30dPlus : "0"}
-                      </StyledTableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>
@@ -315,7 +244,7 @@ const OrderPerSupplier = ({
       {/* </div> */}
 
       {/* <div className="h-[20px]"> */}
-      <p className="ml-auto mt-auto bg-[white] lg:text-sm xl:text-base md:text-sm sm:text-xs 2xl:text-base font-normal pt-2  md:py-0.5  text-end px-5 rounded-b-lg shadow-sm">
+      <p className="ml-auto  invisible bg-[white] lg:text-sm xl:text-base md:text-sm sm:text-xs 2xl:text-base font-normal pt-2  md:py-0.5  text-end px-5 rounded-b-lg ">
         Click View All to see More
       </p>
       {/* </div> */}

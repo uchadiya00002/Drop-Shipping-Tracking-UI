@@ -18,11 +18,7 @@ import { MdOutlineMarkEmailRead } from "react-icons/md";
 import { RiFilterLine } from "react-icons/ri";
 import { FiTrash } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllNotification,
-  selectUser,
-  selectUserNotifications,
-} from "../../store/slices/authSlice";
+
 import { $axios, $baseURL } from "../axios/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,9 +26,39 @@ import ToolTip from "./Tooltip";
 import moment from "moment/moment";
 import { Close } from "@mui/icons-material";
 
+const nt = [
+  {
+    nId: 2,
+    title: "Wallmart send you a message",
+    body: "Order is delayed",
+    date: "11-09-2022",
+  },
+  {
+    nId: 3,
+    title: "Best Buy send you a message",
+    body: "Check your mail for Order status",
+    date: "11-10-2022",
+  },
+  {
+    nId: 4,
+    title: "Flipkart send you a message",
+    body: "Can you explain me this delay?",
+    date: "11-10-2022",
+  },
+  {
+    nId: 5,
+    title: "Raghav send you a message",
+    body: "Hey Avinash can you this Order details",
+    date: "01-10-2022",
+  },
+  {
+    nId: 6,
+    title: "Yash Sarkar send you a message",
+    body: "Order is delivered",
+    date: "11-10-2022",
+  },
+];
 const Notifications = ({ showNotifications, setShowNotifications }) => {
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
   const [notifications, setNotifications] = useState([]);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -40,7 +66,7 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
   const [deleteAll, setDeleteAll] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const ITEM_HEIGHT = 48;
-  const not = useSelector(selectUserNotifications);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -50,111 +76,12 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    if (user) {
-      getAllNotifications();
-    }
-  }, [user, setNotifications]);
-
-  const getAllNotifications = async (value) => {
-    setLoading(true);
-    const payload = {};
-    if (value) {
-      payload.searchTerm = value;
-    }
-    try {
-      const res = await dispatch(getAllNotification(payload));
-      if (res) {
-        const notifications = res?.data?.data;
-        console.log(notifications);
-
-        const sortedNotifications = notifications
-          ?.map((obj) => {
-            return { ...obj, date: new Date(obj.date) };
-          })
-          .sort((a, b) => b.date - a.date);
-        console.log(Array.isArray(sortedNotifications));
-
-        setNotifications(sortedNotifications);
-      }
-      return res;
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-  console.log(notifications);
-
-  const readAllNotifications = async () => {
-    try {
-      const res = await $axios.put(
-        `${$baseURL}/users/users/markAllNotificationRead/${user?._id}`
-      );
-      if (res) {
-        const data = res?.data?.data;
-        getAllNotifications();
-      }
-      return res;
-    } catch (error) {}
-  };
-  const clearNotifications = async () => {
-    try {
-      const res = await $axios.put(
-        `${$baseURL}/users/users/clearAllNotifications/${user._id}`
-      );
-      if (res) {
-        const data = res?.data?.data;
-        getAllNotifications();
-        setDeleteAll(false);
-      }
-      toast.success(res?.data.message);
-      return res;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
-  const readSelNotification = async (notification) => {
-    try {
-      const res = await $axios.put(
-        `${$baseURL}/users/users/markSelNotificationRead/${user._id}/${notification.nId}`
-      );
-
-      if (res) {
-        const data = res?.data?.data;
-        handleClose();
-        getAllNotifications();
-      }
-      toast.success(res?.data.message);
-
-      return res;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
-  const clearSelNotification = async (notification) => {
-    try {
-      const res = await $axios.put(
-        `${$baseURL}/users/users/clearSelNotification/${user?._id}/${notification?.nId}`
-      );
-      if (res) {
-        const data = res?.data?.data;
-        handleClose();
-        getAllNotifications();
-      }
-      toast.success(res?.data.message);
-      return res;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
-
   return (
     <Drawer
       className="max-h-screen overflow-y-auto"
       open={showNotifications}
       onClose={() => {
         setShowNotifications(false);
-        readAllNotifications();
       }}
       anchor={"right"}
     >
@@ -163,12 +90,9 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
           <div className="flex items-center justify-between   bg-primary-bg px-4  py-2">
             <p className="font-medium text-lg  text-white">Notifications</p>
             <div className="flex space-between">
-              {notifications?.length > 0 ? (
+              {nt?.length > 0 ? (
                 <ToolTip title="Mark all notifications as read">
-                  <IconButton
-                    onClick={readAllNotifications}
-                    className="p-1 outline-none"
-                  >
+                  <IconButton className="p-1 outline-none">
                     <MdOutlineMarkEmailRead
                       style={{ fontSize: "24px", color: "white" }}
                     />
@@ -178,7 +102,7 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
                 ""
               )}
 
-              {notifications?.length > 0 ? (
+              {nt?.length > 0 ? (
                 <ToolTip title="Clear all notifications">
                   <IconButton
                     className="ml-2 p-1 outline-none"
@@ -196,7 +120,6 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
                   className="ml-2 p-1 outline-none"
                   onClick={() => {
                     setShowNotifications(false);
-                    readAllNotifications();
                   }}
                   style={{ fontSize: "22px", color: "white" }}
                 >
@@ -234,11 +157,11 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
         </div>
 
         <div>
-          {notifications?.length > 0 &&
-            notifications?.map((d, index) => (
+          {nt?.length > 0 &&
+            nt?.map((d, index) => (
               <div
                 className={`flex items-center justify-center shadow-sm my-1 py-1 ${
-                  d?.isRead ? "bg-[white]" : "bg-[#d5f4e6]"
+                  !d?.isRead ? "bg-[white]" : "bg-[#d5f4e6]"
                 } `}
                 key={d?.nId}
               >
@@ -304,9 +227,6 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
                   >
                     {!selectedNotification?.isRead ? (
                       <MenuItem
-                        onClick={() => {
-                          readSelNotification(selectedNotification);
-                        }}
                         value="MARK_AS_READ"
                         key="MARK_AS_READ"
                         className="capitalize"
@@ -322,7 +242,6 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
                     )}
 
                     <MenuItem
-                      onClick={() => clearSelNotification(selectedNotification)}
                       value="CLEAR"
                       key="CLEAR"
                       style={{
@@ -336,11 +255,6 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
                 </div>
               </div>
             ))}
-          {not?.length === 0 && (
-            <div className="flex justify-center items-center w-full font-semibold text-2xl my-80 ">
-              No Notifications
-            </div>
-          )}
         </div>
       </div>
 
@@ -368,10 +282,9 @@ const Notifications = ({ showNotifications, setShowNotifications }) => {
             style={{
               padding: "3px 16px 3px 16px",
             }}
-            className=" bg-[#03045E] hover:bg-[#0e106a] normal-case rounded"
+            className=" bg-primary-bg hover:bg-primary-bg normal-case rounded"
             variant="contained"
             type="submit"
-            onClick={clearNotifications}
           >
             Delete All
           </Button>

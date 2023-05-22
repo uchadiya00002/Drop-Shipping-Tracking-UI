@@ -130,7 +130,7 @@ const AddDate = ({
         </Button>
         <Button
           disabled={selectedReason === "" || newDate === "" ? true : false}
-          className=" bg-[#03045E] hover:bg-[#0e106a] my-2 lg:my-0.5 py-1.5 font-semibold lg:text-sm normal-case rounded-lg ml-auto"
+          className=" bg-primary-bg hover:bg-primary-bg my-2 lg:my-0.5 py-1.5 font-semibold lg:text-sm normal-case rounded-lg ml-auto"
           variant="contained"
           type="submit"
           onClick={() => {

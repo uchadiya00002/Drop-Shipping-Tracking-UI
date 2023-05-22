@@ -27,28 +27,24 @@ ChartJS.register(
 
 const ReasonBar = ({ data }) => {
   const isXs = useMediaQuery("(min-width:1360px)");
-  const route = useRouter();
-  let labels = [];
-  let actualData = [];
+  // const route = useRouter();
 
-  data &&
-    data[2] &&
-    Object.keys(data[2]).map((key) => {
-      const labelKey = key.split(" ");
-      labels.push(labelKey);
-      actualData.push(data[2][key]);
-    });
+  const getRandomNumbers = () => {
+    const randomNumbers = [];
+    for (let i = 0; i < 5; i++) {
+      const randomNumber = Math.floor(Math.random() * 10); // Generate a random number between 0 and 9
+      randomNumbers.push(randomNumber);
+    }
+    return randomNumbers;
+  };
 
-  const sum =
-    actualData.length > 0 ? actualData.reduce((acc, curr) => acc + curr, 0) : 0;
-
-  console.log(sum);
+  const randomNumbersArray = getRandomNumbers();
   const barData = {
-    labels: labels,
+    labels: ["Road Repair", "Product Damage", "Item Shortage", "Missing"],
     datasets: [
       {
-        data: actualData,
-        backgroundColor: "#5196DB",
+        data: randomNumbersArray,
+        backgroundColor: ["#2C7BE5", "#FF6F61", "#FFC154", "#66CC99"],
         barPercentage: 0.3,
         borderColor: "#5196DB",
         barPercentage: 0.6,
@@ -153,15 +149,9 @@ const ReasonBar = ({ data }) => {
 
   return (
     <>
-      {sum == 0 ? (
-        <div className="flex justify-center items-center my-auto h-56 text-lg font-semibold">
-          No Orders
-        </div>
-      ) : (
-        <div className="w-[90%]">
-          <Bar options={options} data={barData} />
-        </div>
-      )}
+      <div className="w-[100%]">
+        <Bar options={options} data={barData} />
+      </div>
     </>
   );
 };

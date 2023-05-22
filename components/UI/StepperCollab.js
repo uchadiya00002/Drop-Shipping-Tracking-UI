@@ -523,7 +523,7 @@ const StepperCollab = ({ item, getCollabs }) => {
               Cancel
             </Button>
             <Button
-              className=" bg-[#03045E] hover:bg-[#0e106a]    normal-case rounded-lg "
+              className=" bg-primary-bg hover:bg-primary-bg    normal-case rounded-lg "
               variant="contained"
               disabled={reasonValue === ""}
               type="submit"

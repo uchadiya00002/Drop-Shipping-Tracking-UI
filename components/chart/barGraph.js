@@ -28,60 +28,40 @@ ChartJS.register(
 const BarGraph = ({ data }) => {
   const isXs = useMediaQuery("(min-width:1360px)");
   const route = useRouter();
-  let labels = [];
-  let actualData = [];
-  let count = [];
-  let isCritical = [];
-  let supplierName = [];
-  let supplierId = [];
 
-  data &&
-    data[0] &&
-    Object.keys(data[0]).map((key) => {
-      labels.push(key);
-      actualData.push(data[0][key]);
-    });
-
-  actualData.map((data, idx) => {
-    const suppData = data?.supplierName.split(" ");
-    count.push(data?.count);
-    supplierName.push(suppData);
-    isCritical.push(data?.isCritical);
-    supplierId.push(data?.supplierId);
-  });
-  const sum = count?.reduce((acc, curr) => acc + curr, 0);
-  const barData = {
-    labels: supplierName,
-    datasets: [
-      {
-        data: count,
-        barPercentage: 0.4,
-        backgroundColor: isCritical?.map((val, idx) =>
-          val ? "red" : "#5196DB"
-        ),
-        barPercentage: count?.length <= 2 ? 0.2 : 0.6,
-        categoryPercentage: count?.length <= 2 ? 0.5 : 0.7,
-      },
-    ],
+  const getRandomNumbers = () => {
+    const randomNumbers = [];
+    for (let i = 0; i < 5; i++) {
+      const randomNumber = Math.floor(Math.random() * 10); // Generate a random number between 0 and 9
+      randomNumbers.push(randomNumber);
+    }
+    return randomNumbers;
   };
 
-  const printElementAtEvent = (element) => {
-    if (!element.length) return;
-    const { datasetIndex, index } = element[0];
-    route.push({
-      pathname: "/order/purchaseOrder",
-      query: {
-        supplierId: supplierId[index],
+  const randomNumbersArray = getRandomNumbers();
+  const barData = {
+    labels: ["D MART", "WALLMART", "BEST BUY", "RELIANCE FRESH", "ONDOOR"],
+    datasets: [
+      {
+        data: randomNumbersArray,
+        barPercentage: 0.4,
+        backgroundColor: [
+          "#2C7BE5",
+          "#FF6F61",
+          "#FFC154",
+          "#66CC99",
+          "#B84EFF",
+        ],
+        barPercentage: 0.6,
+        categoryPercentage: 0.7,
       },
-    });
+    ],
   };
 
   const options = {
     responsive: true,
     indexAxis: "x",
-    onClick: (evt, item) => {
-      printElementAtEvent(item);
-    },
+
     layout: {
       padding: 26,
     },
@@ -152,15 +132,9 @@ const BarGraph = ({ data }) => {
 
   return (
     <>
-      {sum === 0 ? (
-        <div className="flex justify-center items-center my-auto h-56 text-lg font-semibold">
-          No Orders
-        </div>
-      ) : (
-        <div className="w-[90%]">
-          <Bar options={options} data={barData} className="my-auto " />
-        </div>
-      )}
+      <div className="w-[100%]">
+        <Bar options={options} data={barData} className="my-auto " />
+      </div>
     </>
   );
 };

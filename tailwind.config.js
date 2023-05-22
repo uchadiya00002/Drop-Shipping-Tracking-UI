@@ -28,7 +28,7 @@ module.exports = {
       "part-rejected": "#F17B33",
     },
     color: {
-      "primary-bg": "#03045E",
+      "primary-bg": "#1A202C",
       "light-gray": "#F3F4F6",
       "icon-gray": "#9CAABF",
     },

@@ -20,13 +20,13 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import { Article, Info, SwapHorizontalCircle } from "@mui/icons-material";
 
 const items = [
-  {
-    id: 1,
-    name: "Home",
-    icon: <AiFillHome />,
-    route: "/home",
-    val: "/home",
-  },
+  // {
+  //   id: 1,
+  //   name: "Home",
+  //   icon: <AiFillHome />,
+  //   route: "/home",
+  //   val: "/home",
+  // },
 
   {
     id: 2,
@@ -37,44 +37,44 @@ const items = [
   },
   {
     id: 3,
-    name: "Orders",
+    name: "Orders History",
     icon: <MdShoppingBag />,
     route: "/order/purchaseOrder",
     val: "/order",
   },
   {
     id: 4,
-    name: "Invoices",
+    name: "Payment & Invoice",
     icon: <FaReceipt />,
     route: "/invoices",
     val: "/invoices",
     otherRoute: "/agingReport",
   },
 
-  {
-    id: 6,
-    name: "Collaboration Room",
-    icon: <BsFillDoorOpenFill />,
-    route: "/collaborationRoom",
-    val: "/collaborationRoom",
-    otherRoute: "/collabRoom",
-  },
+  // {
+  //   id: 6,
+  //   name: "Collaboration Room",
+  //   icon: <BsFillDoorOpenFill />,
+  //   route: "/collaborationRoom",
+  //   val: "/collaborationRoom",
+  //   otherRoute: "/collabRoom",
+  // },
 
-  {
-    id: 9,
-    name: "Transactional Data",
-    icon: <SwapHorizontalCircle />,
-    route: "/transactionalData",
-    val: "/transactionalData",
-  },
+  // {
+  //   id: 9,
+  //   name: "Transactional Data",
+  //   icon: <SwapHorizontalCircle />,
+  //   route: "/transactionalData",
+  //   val: "/transactionalData",
+  // },
 
-  {
-    id: 11,
-    name: "Account",
-    icon: <FaUserAlt />,
-    route: "/account",
-    val: "/account",
-  },
+  // {
+  //   id: 11,
+  //   name: "Account",
+  //   icon: <FaUserAlt />,
+  //   route: "/account",
+  //   val: "/account",
+  // },
 ];
 
 const SideSection = ({
@@ -84,9 +84,7 @@ const SideSection = ({
   showMenubar,
 }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const userName = useSelector((state) => state.auth?.user.firstName);
-  const role = useSelector((state) => state.auth?.user.role);
+
   return (
     <div
       className={`flex flex-col bg-primary-bg min-w-fit z-[4] sticky h-screen overflow-hidden left-0 bottom-0 top-0 ${
@@ -96,13 +94,20 @@ const SideSection = ({
       } `}
     >
       <div className="xs:flex xs:justify-between  xs:items-center ">
-        <h1
-          className={`mt-5 md:mt-3 font-bold md:text-sm text-center text-white xs:text-3xl ${
-            drawerOpen ? "text-xl" : "text-lg"
-          } `}
-        >
-          ERP
-        </h1>
+        {drawerOpen ? (
+          <h1
+            className={`mt-5 md:mt-3 font-bold md:text-sm text-center text-white xs:text-3xl text-xl `}
+          >
+            DROP SHIP
+          </h1>
+        ) : (
+          <h1
+            className={`mt-5 md:mt-3 font-bold md:text-sm text-center text-white xs:text-3xl text-lg`}
+          >
+            DS
+          </h1>
+        )}
+
         <ClearOutlinedIcon
           fontSize="20"
           className="hidden xs:mt-5  xs:inline xs:cursor-pointer text-white  xs:text-3xl xs:duration-150 "
@@ -134,7 +139,7 @@ const SideSection = ({
         >
           {items.map((item) => (
             <div
-              className={`flex items-center  xs:flex xs:justify-start lg:text-xs  md:text-xs xs:text-xl md:gap-x-2  gap-x-4 lg:gap-x-2 cursor-pointer pb-2.5 md:pb-1 lg:pb-1 ${
+              className={`flex items-center  xs:flex xs:justify-start text-base md:gap-x-2  gap-x-4 lg:gap-x-2 cursor-pointer pb-2.5 md:pb-1 lg:pb-1 ${
                 router.pathname.includes(item.val)
                   ? "text-white"
                   : "text-[#9CAABF]"
@@ -160,13 +165,7 @@ const SideSection = ({
           ))}
         </div>
       </div>
-      <p
-        onClick={() => {
-          dispatch(logoutUser());
-        }}
-      >
-        Logout
-      </p>
+      {/* <p className="text-white text-xs">Logout</p> */}
     </div>
   );
 };

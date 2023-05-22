@@ -16,16 +16,16 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>ERP</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DROP SHIP</title>
       </Head>
-      <Provider store={store}>
-        <StyledEngineProvider injectFirst>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </StyledEngineProvider>
-      </Provider>
+      {/* <Provider store={store}> */}
+      <StyledEngineProvider injectFirst>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </StyledEngineProvider>
+      {/* </Provider> */}
       <ToastContainer />
     </>
   );

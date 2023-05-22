@@ -65,7 +65,7 @@ const Notify = ({ showDialog, setShowDialog, orderNo }) => {
               style={{
                 padding: "3px 16px 3px 16px",
               }}
-              className=" bg-[#03045E] hover:bg-[#0e106a] normal-case rounded"
+              className=" bg-primary-bg hover:bg-primary-bg normal-case rounded"
               variant="contained"
               disabled={selectedRemarks === "" ? true : false}
               onClick={() => {

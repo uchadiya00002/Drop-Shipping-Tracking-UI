@@ -25,24 +25,6 @@ const signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-
-  const SigninUser = async (values) => {
-    const { email, password } = values;
-
-    const res = await dispatch(loginUser(values));
-    if (res) {
-      setLoading(true);
-      const role = res?.data?.data?.role;
-
-      if (role == "SUPPLIER") {
-        router.push("/collaborationRoom");
-      } else {
-        router.push("/home");
-      }
-    }
-  };
 
   const initialFormValues = {
     email: "",
@@ -54,12 +36,11 @@ const signin = () => {
       <div className="flex items-center justify-center  h-screen my-auto mx-5 whitespace-nowrap ">
         <div className="w-[400px] border-2 rounded-md border-[#65748B] border-solid border-opacity-25 px-5 py-10 ">
           <h2 className="my-2 mb-6 text-2xl font-bold">Sign In</h2>
-
           <Formik
             initialValues={initialFormValues}
             validationSchema={formValidation}
             onSubmit={(values) => {
-              SigninUser(values);
+              router.push("/dashboard");
             }}
           >
             {({
@@ -119,7 +100,7 @@ const signin = () => {
                 </div>
                 <Button
                   type="submit"
-                  className=" bg-[#03045E] hover:bg-[#03045E] relative  my-2 py-1.5 font-semibold normal-case rounded-lg"
+                  className=" bg-primary-bg hover:bg-primary-bg relative  my-2 py-1.5 font-semibold normal-case rounded-lg"
                   variant="contained"
                   fullWidth
                 >
@@ -135,7 +116,7 @@ const signin = () => {
               </Form>
             )}
           </Formik>
-          <div className="flex justify-between items-start">
+          {/* <div className="flex justify-between items-start">
             <p className="my-2 text-[#65748B] text-sm">
               Don’t have an account? <br />
               <Link href="/signup">
@@ -147,7 +128,8 @@ const signin = () => {
                 <a className="">Forgot password?</a>
               </Link>
             </p>
-          </div>
+          </div> */}
+          x
         </div>
       </div>
     </>

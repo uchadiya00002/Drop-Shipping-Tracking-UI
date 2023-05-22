@@ -55,7 +55,6 @@ const allStatus = [
   },
 ];
 const purchaseOrder = (props) => {
-  const dispatch = useDispatch();
   const [type, setType] = useState("Purchase Order");
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -66,56 +65,6 @@ const purchaseOrder = (props) => {
     setAnchorEl(null);
   };
   const route = useRouter();
-  const { user, fallBack } = useAuth();
-
-  useEffect(() => {
-    if (user) {
-      if (route?.query?.type) {
-        const type = route?.query?.type;
-        setType(type);
-      }
-    }
-  }, [user, route]);
-
-  const handleExport = async (supplierId) => {
-    try {
-      let payload = {
-        criticalParts: true,
-      };
-
-      let response;
-
-      if (type != "Purchase Order") {
-        response = await $axios({
-          url: `${$baseURL}/purchaseOrder/export`,
-          method: "POST",
-          data: payload,
-          responseType: "blob",
-        });
-      } else {
-        response = await $axios({
-          url: `${$baseURL}/purchaseOrder/export`,
-          method: "POST",
-          // data: payload,
-          responseType: "blob",
-        });
-      }
-
-      const blob = await response.data;
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "Purchase Order.csv";
-      link.click();
-      setTimeout(() => URL.revokeObjectURL(link.href), 0);
-    } catch (error) {}
-  };
-
-  if (!$windowExists) {
-    return fallBack;
-  } else if (!user) {
-    // router.push('/')
-    return fallBack;
-  }
 
   return (
     <div className="w-full bg-[#E5E5E5] xs:min-h-screen grow flex flex-col px-5">
@@ -131,10 +80,10 @@ const purchaseOrder = (props) => {
           className="text-black font-bold text-lg "
         >
           {type == "Purchase Order"
-            ? "Purchase Order"
+            ? "Order History"
             : "Purchase Order For Critical Follow Up"}
         </Button>
-        <Button
+        {/* <Button
           onClick={() => handleExport()}
           className="ml-auto normal-case"
           startIcon={<FileDownloadOutlined />}
@@ -146,7 +95,7 @@ const purchaseOrder = (props) => {
           }}
         >
           Export
-        </Button>
+        </Button> */}
       </div>
       <div>
         {type == "Purchase Order" ? <PurchaseOrders /> : <CriticalOrders />}

@@ -8,7 +8,7 @@ const ButtonWrapper = ({ label, ...otherProps }) => {
       sx={{ background: "#03045E" }}
       {...otherProps}
       variant="contained"
-      className=" bg-[#03045E] hover:bg-[#0e106a] ml-auto my-3 py-3  font-semibold normal-case rounded-lg "
+      className=" bg-primary-bg hover:bg-primary-bg ml-auto my-3 py-3  font-semibold normal-case rounded-lg "
     >
       {label}
     </Button>

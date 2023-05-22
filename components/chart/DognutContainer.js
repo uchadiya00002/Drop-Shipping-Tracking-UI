@@ -37,9 +37,9 @@ const DognutContainer = ({ count }) => {
     labels: ["Pending", "Approved", "Rejected"],
     datasets: [
       {
-        data: [pendingCount, approvedCount, rejectedCount],
-        backgroundColor: ["#ffc000", "#a8d08c", "#ff0000"],
-        borderColor: ["#ffc000", "#a8d08c", "#ff0000"],
+        data: [2, 6, 2],
+        backgroundColor: ["#FFCC66", "#66CC99", "#FF6666"],
+        // borderColor: ["#ffc000", "#a8d08c", "#ff0000"],
         borderWidth: 0,
         barPercentage: isXs ? 0.8 : 0.7,
         categoryPercentage: 0.8,
@@ -50,11 +50,7 @@ const DognutContainer = ({ count }) => {
     ],
   };
 
-  const printElementAtEvent = async (element) => {
-    if (!element.length) return;
-    const { datasetIndex, index } = element[0];
-  };
-  const maxVal = Math.max(...dougnutData.datasets[0].data) * 2;
+  const maxVal = Math.max(...dougnutData.datasets[0].data) * 1.5;
   const option = {
     responsive: true,
     maintainAspectRatio: false,
@@ -178,7 +174,7 @@ const DognutContainer = ({ count }) => {
       },
       title: {
         display: false,
-        text: "New Delivery Date Approval Status",
+        text: "Order Approval Status",
         align: "center",
         color: "black",
         font: {
@@ -199,13 +195,7 @@ const DognutContainer = ({ count }) => {
 
   return (
     <>
-      {totalOrders === 0 ? (
-        <div className="flex justify-center items-center my-auto h-full text-lg font-semibold">
-          No Orders
-        </div>
-      ) : (
-        <Bar data={dougnutData} options={option} />
-      )}
+      <Bar data={dougnutData} options={option} />
     </>
   );
 };

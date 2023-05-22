@@ -57,7 +57,6 @@ import {
   updatePurchaseItem,
   updatePurchaseOrder,
 } from "../../store/slices/orderSlice";
-import { useAuth } from "../../utils/hooks";
 import Pagination from "../../components/UI/Pagination";
 import styled from "@emotion/styled";
 import ToolTip from "../UI/Tooltip";
@@ -1089,8 +1088,7 @@ const CollabTableForBuyer = () => {
                                       materialAvailabilityStatus ==
                                         "Available" &&
                                       processingStatus == "Complete" &&
-                                      prepToDispatchStatus ==
-                                        "Dispatched" &&
+                                      prepToDispatchStatus == "Dispatched" &&
                                       "cursor-pointer"
                                     }
                                     ${
@@ -1207,8 +1205,7 @@ const CollabTableForBuyer = () => {
                                           ? "bg-[#FF8C00]"
                                           : // : subRow?.status == "ORDERED"
                                           // ? "bg-[#FEDC56]"
-                                          subRow?.status ==
-                                            "PARTIALLY SERVICED"
+                                          subRow?.status == "PARTIALLY SERVICED"
                                           ? "bg-[#FEDC56]"
                                           : ""
                                       } 
@@ -1433,7 +1430,8 @@ const CollabTableForBuyer = () => {
                                               setName("Shipped");
                                               setSelectedStatus("Shipped");
                                               setShowPopup(
-                                                prepToDispatchStatus == "Dispatched"
+                                                prepToDispatchStatus ==
+                                                  "Dispatched"
                                               );
                                             }}
                                           ></div>
@@ -2005,7 +2003,7 @@ const CollabTableForBuyer = () => {
               style={{
                 padding: "3px 16px 3px 16px",
               }}
-              className=" bg-[#03045E] hover:bg-[#0e106a] normal-case rounded"
+              className=" bg-primary-bg hover:bg-primary-bg normal-case rounded"
               variant="contained"
               disabled={reasonValue === ""}
               type="submit"
@@ -2077,7 +2075,7 @@ const CollabTableForBuyer = () => {
             style={{
               padding: "3px 16px 3px 16px",
             }}
-            className=" bg-[#03045E] hover:bg-[#0e106a] normal-case rounded"
+            className=" bg-primary-bg hover:bg-primary-bg normal-case rounded"
             variant="contained"
             type="submit"
             onClick={() => {

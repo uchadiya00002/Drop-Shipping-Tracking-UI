@@ -26,33 +26,21 @@ ChartJS.register(
 
 const DelayedOrdersChart = ({ data }) => {
   const isXs = useMediaQuery("(max-width:1360px)");
-  const sum = Object.values(data && data[1]).reduce(
-    (acc, curr) => acc + curr,
-    0
-  );
+  const getRandomNumbers = () => {
+    const randomNumbers = [];
+    for (let i = 0; i < 5; i++) {
+      const randomNumber = Math.floor(Math.random() * 10); // Generate a random number between 0 and 9
+      randomNumbers.push(randomNumber);
+    }
+    return randomNumbers;
+  };
 
-  const totalOrdersForDeliver = data[1]?.forDelivery || 0;
-
-  const delayed = data[1]?.delay || 0;
-
-  const dueIn7d = data[1]?.dueIn7d || 0;
-  const dueIn7To14d = data[1]?.dueIn7To14d || 0;
-  const dueIn14To30d = data[1]?.dueIn14To30d || 0;
-  const dueIn30dPlus = data[1]?.dueIn30dPlus || 0;
-  // const delayedPercentage = (data[1]?.delay / totalOrdersForDeliver) * 100;
-
-  // const dueIn7dPercentage = (data[1]?.dueIn7d / totalOrdersForDeliver) * 100;
-  // const dueIn7To14dPercentage =
-  //   (data[1]?.dueIn7To14d / totalOrdersForDeliver) * 100;
-  // const dueIn14To30dPercentage =
-  //   (data[1]?.dueIn14To30d / totalOrdersForDeliver) * 100;
-  // const dueIn30dPlusPercentage =
-  //   (data[1]?.dueIn30dPlus / totalOrdersForDeliver) * 100;
+  const randomNumbersArray = getRandomNumbers();
   const dougnutData = {
     labels: ["Delayed", "7D", "7-14D", "15-30D", "30+"],
     datasets: [
       {
-        data: [delayed, dueIn7d, dueIn7To14d, dueIn14To30d, dueIn30dPlus],
+        data: randomNumbersArray,
         backgroundColor: ["red", "#F17B33", "#facd59", "#66a2df", "#93d354"],
         borderWidth: 0,
       },
@@ -64,10 +52,10 @@ const DelayedOrdersChart = ({ data }) => {
     maintainAspectRatio: false,
     layout: {
       padding: {
-        top: 10,
-        bottom: 0,
-        left: 10,
-        right: 10,
+        left: 25,
+        right: 25,
+        top: 25,
+        bottom: 25,
       },
     },
 
@@ -90,15 +78,7 @@ const DelayedOrdersChart = ({ data }) => {
         display: function (context) {
           return context.dataset.data[context.dataIndex] !== 0;
         },
-        formatter: (value, context) => {
-          if (value == 0) {
-            return;
-          } else {
-            return `${Math.round((value / data[1]?.forDelivery) * 100).toFixed(
-              0
-            )}%`;
-          }
-        },
+
         align: "start",
         borderColor: "black",
         anchor: "end",
@@ -112,8 +92,8 @@ const DelayedOrdersChart = ({ data }) => {
       },
       title: {
         display: true,
-        text: "Aging Report PO",
-        align: "center",
+        text: "Purchase Order Status",
+        align: "left",
         position: "top",
         color: "black",
         font: {
@@ -137,15 +117,9 @@ const DelayedOrdersChart = ({ data }) => {
 
   return (
     <>
-      {totalOrdersForDeliver === 0 ? (
-        <div className="flex justify-center items-center my-auto h-60 text-lg font-semibold">
-          No Orders
-        </div>
-      ) : (
-        <div className="h-full">
-          <Doughnut data={dougnutData} options={option} />
-        </div>
-      )}
+      <div className="w-full">
+        <Doughnut data={dougnutData} options={option} />
+      </div>
     </>
   );
 };

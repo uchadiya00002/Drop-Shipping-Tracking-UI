@@ -62,14 +62,12 @@ const allStatus = [
 ];
 
 const InvoiceTable = (props) => {
-  const dispatch = useDispatch();
   const [status, setStatus] = useState("ALL");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const route = useRouter();
-  const { user, fallBack } = useAuth();
   const [sortKeys, setSortKeys] = useState({
     invoiceDate: 1,
     invoiceNumber: 1,
@@ -86,84 +84,6 @@ const InvoiceTable = (props) => {
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const invoices = useSelector(invoiceSelector);
-
-  useEffect(async () => {
-    if (user) {
-      if (user?.role == "SUPPLIER") {
-        route.push("/collaborationRoom");
-      } else {
-        getInvoices();
-      }
-    }
-  }, [user, page, searchText, limit, status, sortKeys, route]);
-
-  const getInvoices = async () => {
-    if (selectedColumnKey != "") {
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
-    try {
-      let sort;
-      if (selectedColumnKey != "" && sortKeys[selectedColumnKey] != 0) {
-        sort = {
-          [selectedColumnKey]: sortKeys[selectedColumnKey],
-        };
-      }
-      let payload = {
-        pagination: {
-          limit: limit,
-          page: page,
-        },
-        sort: sort,
-      };
-
-      if (searchText.length > 0) {
-        payload.searchTerm = searchText;
-      }
-
-      if (status != "ALL") {
-        payload.conditions = {
-          orderStatus: status,
-        };
-      }
-      if (route.query.type != "Aging Report") {
-        const res = await dispatch(fetchInvoices(payload));
-      }
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSort = async (columnKey) => {
-    setSelectedColumnKey(columnKey);
-    handleSortValue();
-  };
-
-  const handleSortValue = () => {
-    let _sortKeys = { ...sortKeys };
-
-    Object.keys(_sortKeys)?.map((key) => {
-      if (selectedColumnKey !== key) {
-        _sortKeys[key] = 1;
-      }
-    });
-
-    switch (sortKeys[selectedColumnKey]) {
-      case 1:
-        _sortKeys[selectedColumnKey] = -1;
-        break;
-      case -1:
-        _sortKeys[selectedColumnKey] = 0;
-        break;
-      case 0:
-        _sortKeys[selectedColumnKey] = 1;
-    }
-
-    setSortKeys(_sortKeys);
-  };
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -205,6 +125,8 @@ const InvoiceTable = (props) => {
     },
   ];
 
+  const invoices = ["ddd", "ddd", "ddd", "ddd", "ddd", "ddd"];
+
   const listFields = listFromDict({
     invoiceDate: { name: "invoice Date" },
     invoiceNumber: { name: "invoice Number" },
@@ -218,16 +140,10 @@ const InvoiceTable = (props) => {
     followUpStatus: { name: "follow up Status" },
   });
 
-  if (!$windowExists) {
-    return fallBack;
-  } else if (!user) {
-    return fallBack;
-  }
-
   return (
     <div className="w-full lg:mt-12 mt-16 xs:mt-20 drawer-open reduce-wid  overflow-auto drawer-close smooth   fixed z-[3] ">
       <div className="bg-[white]  ">
-        <div className=" px-2.5 py-1 bg-[white] z-[2] ">
+        {/* <div className=" px-2.5 py-1 bg-[white] z-[2] ">
           <div className="flex flex-row my-1 justify-end items-center xs:flex-col  bg-[white]  ">
             <div className="ml-1 mr-2 md:w-52 lg:w-52 xl:w-32 2xl:w-32 w-full mb-2 md:mb-0 lg:mb-0 xl:mb-0 2xl:mb-0">
               <CustomSelect
@@ -262,9 +178,9 @@ const InvoiceTable = (props) => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
 
-        {!loading && invoices?.data?.length > 0 ? (
+        {!loading && invoices?.length > 0 ? (
           <TableContainer
             className="xs:pb-[190px] "
             sx={{ maxHeight: "calc(100vh - 170px)" }}
@@ -332,7 +248,7 @@ const InvoiceTable = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody className="overflow-scroll">
-                {invoices?.data?.map((item, index) => (
+                {invoices?.map((item, index) => (
                   <StyledTableRow
                     key={index}
                     className="overflow-y-scroll whitespace-nowrap"
@@ -527,16 +443,6 @@ const InvoiceTable = (props) => {
                             }}
                           />
                         </ToolTip>
-                        <ToolTip title="Notify">
-                          <Notifications
-                            className="text-[#6B7280] cursor-pointer ml-2 sm:text-sm md:text-base lg:text-lg xl:text-xl "
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedOrder(item?.orderNo);
-                              setShowDialog(true);
-                            }}
-                          />
-                        </ToolTip>
                       </div>
                     </StyledTableCell>
                   </StyledTableRow>
@@ -570,11 +476,6 @@ const InvoiceTable = (props) => {
         }}
         focused={selectedInvoice}
         listFields={listFields}
-      />
-      <Notify
-        setShowDialog={setShowDialog}
-        showDialog={showDialog}
-        orderNo={selectedOrder}
       />
     </div>
   );

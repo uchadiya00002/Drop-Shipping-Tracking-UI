@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Badge,
   Button,
   Drawer,
@@ -22,11 +23,7 @@ import Notifications from "./Notifications";
 import SideSection from "./SideSection";
 import Layout from "./Layout";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  checkSingleUser,
-  logoutUser,
-  selectUser,
-} from "../../store/slices/authSlice";
+import { checkSingleUser, logoutUser } from "../../store/slices/authSlice";
 import { useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { KeyboardArrowDown, Person } from "@mui/icons-material";
@@ -35,9 +32,8 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMenubar, setShowMenubar] = useState(false);
-  const dispatch = useDispatch();
+
   const router = useRouter();
-  let user = useSelector(selectUser);
   const [notLength, setNotLength] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -49,52 +45,11 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  useEffect(async () => {
-    if (user) {
-      handleCheckUser();
-    }
-  }, [user, setNotLength, showNotifications]);
-
-  const handleCheckUser = async () => {
-    try {
-      const payload = { _id: user?._id };
-      const res = await dispatch(checkSingleUser(payload));
-      if (res) {
-        const userInfo = res?.data?.data;
-        const newUser = { ...userInfo };
-        const unReadNotificationsCount = newUser?.notificationList?.filter(
-          (n) => !n.isRead
-        );
-        setNotLength(unReadNotificationsCount);
-      }
-    } catch (error) {}
-  };
-
   return (
     <div className="shadow-lg top-0 right-0 left-0  sticky bg-[white] z-50 duration-100  xs:z-50 xs:duration-500">
-      <div className=" flex justify-between mx-auto py-1.5 px-5 shadow">
-        <div className="p-1 invisible ">
-          <TextField
-            size="small"
-            type="text"
-            id="input-with-icon-textfield"
-            label="Search"
-            variant="outlined"
-            inputProps={{
-              style: {
-                padding: "6px 0px 8px 6px",
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <AiOutlineSearch style={{ padding: "0px" }} size={20} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
-        <div className="flex justify-center text-lg xl:text-2xl  items-center gap-4 text-[#6B7280] ml-2">
+      <div className=" flex justify-between items-center mx-auto py-1.5 px-5 shadow">
+        <div className="p-1 font-semibold">Welcome Avinash</div>
+        <div className="flex justify-center text-lg xl:text-2xl  items-center gap-2 text-[#6B7280] ml-2">
           <button
             onClick={() => {
               setShowNotifications(!showNotifications);
@@ -113,11 +68,45 @@ const Navbar = () => {
               <AiFillBell size={20} />
             )}
           </button>
+          <Avatar
+            id="demo-customized-button"
+            aria-controls={open ? "demo-customized-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            disableElevation
+            onClick={handleClick}
+            // endIcon={<KeyboardArrowDownIcon style={{ fontSize: "28px" }} />}
+            className="h-8 w-8 cursor-pointer "
+          ></Avatar>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={() => setAnchorEl(null)}
+            // MenuListProps={{
+            //   "aria-labelledby": "basic-button",
+            // }}
+          >
+            <MenuItem
+              onClick={() => {
+                setAnchorEl(null);
+                router.push("/account");
+              }}
+            >
+              Profile
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                router.push("/signin");
+              }}
+            >
+              Logout
+            </MenuItem>
+          </Menu>
           {showNotifications && (
             <Notifications
               showNotifications={showNotifications}
               setShowNotifications={setShowNotifications}
-              handleCheckUser={handleCheckUser}
             />
           )}
 

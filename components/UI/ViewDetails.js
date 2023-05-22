@@ -3,8 +3,6 @@ import React from "react";
 import { $date, $prettify, getDeepValue } from "../../utils";
 
 function ViewDetails({ open, onClose, listFields, focused, ...props }) {
-  const user = JSON.parse(localStorage.getItem("user"));
-
   return (
     <div>
       <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth={true}>
