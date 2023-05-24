@@ -49,12 +49,13 @@ const items = [
     // otherRoute: "/collabRoom",
   },
 
-  {
-    id: 9,
-    name: "Transactional Data",
-    icon: <SwapHorizontalCircle />,
-    route: "/transaction",
-  },
+  // {
+  //   id: 9,
+  //   name: "Transactional Data",
+  //   icon: <SwapHorizontalCircle />,
+  //   route: "/transaction",
+  //   val: "/transaction",
+  // },
 
   {
     id: 11,

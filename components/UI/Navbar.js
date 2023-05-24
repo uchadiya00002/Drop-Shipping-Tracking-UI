@@ -34,20 +34,17 @@ const Navbar = () => {
               setShowNotifications(!showNotifications);
             }}
           >
-            {notLength && !!notLength?.length ? (
-              <Badge
-                badgeContent=" "
-                variant="dot"
-                overlap="circular"
-                color="error"
-              >
-                <AiFillBell size={20} />
-              </Badge>
-            ) : (
+            <Badge
+              badgeContent=" "
+              variant="dot"
+              overlap="circular"
+              color="error"
+            >
               <AiFillBell size={20} />
-            )}
+            </Badge>
           </button>
           <Avatar
+            src="/images/itachi.jpg"
             id="demo-customized-button"
             aria-controls={open ? "demo-customized-menu" : undefined}
             aria-haspopup="true"
